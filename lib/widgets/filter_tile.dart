@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:location_filter_app/data_model/country_model.dart';
-import 'package:location_filter_app/model/model.dart';
+import '../model/my_model.dart';
 
 class FilterTile extends StatefulWidget {
   final CountryModel mockCountry;
@@ -17,7 +17,7 @@ class _FilterTileState extends State<FilterTile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: GestureDetector(
         onTap: () {
           setState(() {

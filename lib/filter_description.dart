@@ -14,14 +14,14 @@ class FilterDescription extends StatefulWidget {
 
 class _FilterDescriptionState extends State<FilterDescription> {
   final List<CountryModel> mockCountries = MocksCountry.fetchAll();
-  List<CountryModel> _selectedCountry = [];
-
+  List<CountryModel> _searchedCountry = [];
+  List<CountryModel> checkedCountry = [];
   bool isChecked = false;
   @override
   void initState() {
     super.initState();
     // loadData();
-    _selectedCountry = mockCountries;
+    _searchedCountry = mockCountries;
   }
 
   Future<void> loadData() async {
@@ -33,14 +33,22 @@ class _FilterDescriptionState extends State<FilterDescription> {
     if (enteredKeyword.isEmpty) {
       result = mockCountries;
     } else {
-      result = _selectedCountry
+      result = _searchedCountry
           .where((user) =>
               user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
     }
     setState(() {
-      _selectedCountry = result;
+      _searchedCountry = result;
     });
+  }
+
+  void selectedFilter(bool checked) {
+    for (var item in mockCountries) {
+      if (item.checked) {
+        checkedCountry.add(item);
+      }
+    }
   }
 
   @override
@@ -50,9 +58,19 @@ class _FilterDescriptionState extends State<FilterDescription> {
         TextField(
           onChanged: (value) => _runFilter(value),
           decoration: const InputDecoration(
-              labelText: 'Filter Locations',
-              prefixIcon: Icon(Icons.search),
-              border: OutlineInputBorder()),
+            labelText: 'Filter Locations',
+            prefixIcon: Icon(Icons.search),
+            suffixIcon: Padding(
+              padding: EdgeInsets.only(top: 15, right: 5),
+              child: Text(
+                'checked country list',
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+            border: OutlineInputBorder(),
+          ),
         ),
         const SizedBox(height: 10),
         const Row(
@@ -64,14 +82,28 @@ class _FilterDescriptionState extends State<FilterDescription> {
         ),
         Expanded(
           child: ListView.builder(
-            itemCount: _selectedCountry.length,
+            itemCount: _searchedCountry.length,
             itemBuilder: (context, index) {
-              return FilterTile(_selectedCountry[index]);
+              return FilterTile(_searchedCountry[index]);
               // return Text('data');
             },
           ),
         ),
       ],
     );
+  }
+
+  Widget selectedCountryWidget() {
+    return ListView.builder(
+        itemCount: checkedCountry.length,
+        itemBuilder: ((context, index) {
+          return Card(
+              elevation: 3,
+              color: Colors.amber,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(checkedCountry[index].name),
+              ));
+        }));
   }
 }

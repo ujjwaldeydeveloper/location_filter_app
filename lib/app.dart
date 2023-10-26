@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:location_filter_app/model/model.dart';
 import 'package:provider/provider.dart';
 
 import 'filter_description.dart';
+import 'model/my_model.dart';
 import 'widgets/search_bar_widget.dart';
 
 class App extends StatefulWidget {

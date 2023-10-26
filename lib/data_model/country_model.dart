@@ -6,8 +6,13 @@ part 'country_model.g.dart';
 class CountryModel {
   final String name;
   final String flagUrl;
+  final bool checked;
 
-  CountryModel({required this.name, required this.flagUrl});
+  CountryModel({
+    required this.name,
+    required this.flagUrl,
+    required this.checked,
+  });
 
   factory CountryModel.fromJson(Map<String, dynamic> json) =>
       _$CountryModelFromJson(json);

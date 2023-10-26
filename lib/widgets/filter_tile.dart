@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:location_filter_app/model/country_model.dart';
+import 'package:location_filter_app/data_model/country_model.dart';
+import 'package:location_filter_app/model/model.dart';
 
 class FilterTile extends StatefulWidget {
   final CountryModel mockCountry;
@@ -17,20 +18,27 @@ class _FilterTileState extends State<FilterTile> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
-      child: Row(
-        children: [
-          Checkbox(
-            value: isChecked,
-            onChanged: (bool? value) {
-              setState(() {
-                isChecked = value!;
-              });
-            },
-          ),
-          Image.network(widget.mockCountry.flagUrl),
-          const SizedBox(width: 10),
-          Text(widget.mockCountry.name),
-        ],
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            isChecked = isChecked!;
+          });
+        },
+        child: Row(
+          children: [
+            Checkbox(
+              value: isChecked ?? false || MyModel().globalCheckFalse,
+              onChanged: (bool? value) {
+                setState(() {
+                  isChecked = value;
+                });
+              },
+            ),
+            Image.network(widget.mockCountry.flagUrl),
+            const SizedBox(width: 10),
+            Text(widget.mockCountry.name),
+          ],
+        ),
       ),
     );
   }

@@ -16,8 +16,8 @@ class CustomAppBar extends AppBar {
 
   List<Widget> _renderFacts() {
     for (int i = 0; i < 2; i++) {
-      result.add(Text('data1'));
-      result.add(Text('data2'));
+      result.add(const Text('data1'));
+      result.add(const Text('data2'));
     }
     return result;
   }

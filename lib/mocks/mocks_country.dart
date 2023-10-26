@@ -1,4 +1,4 @@
-import 'package:location_filter_app/model/country_model.dart';
+import 'package:location_filter_app/data_model/country_model.dart';
 
 mixin MocksCountry implements CountryModel {
   static final List<CountryModel> items = [

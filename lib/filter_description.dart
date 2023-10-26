@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:location_filter_app/filter_tile.dart';
+import 'package:location_filter_app/model/country_model.dart';
+import 'package:location_filter_app/network_services/api_service.dart';
+import 'package:location_filter_app/widgets/filter_tile.dart';
+
+import 'mocks/mocks_country.dart';
 
 class FilterDescription extends StatefulWidget {
   const FilterDescription({super.key});
@@ -10,7 +14,18 @@ class FilterDescription extends StatefulWidget {
 
 class _FilterDescriptionState extends State<FilterDescription> {
   @override
+  void initState() {
+    super.initState();
+    // loadData();
+  }
+
+  Future<void> loadData() async {
+    final data = ApiService.fetchLocation();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final List<CountryModel> mockCountries = MocksCountry.fetchAll();
     return Column(
       children: [
         const Row(
@@ -20,42 +35,17 @@ class _FilterDescriptionState extends State<FilterDescription> {
             Text('Clear All'),
           ],
         ),
-        const FilterTile(),
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: 5,
-          itemBuilder: (context, index) {
-            return const FilterTile();
-            // return Text('data');
-          },
+        SizedBox(
+          height: 600,
+          child: ListView.builder(
+            itemCount: mockCountries.length,
+            itemBuilder: (context, index) {
+              return FilterTile(mockCountries[index]);
+              // return Text('data');
+            },
+          ),
         ),
-        // ListView.builder(
-        //     itemCount: 5,
-        //     itemBuilder: (BuildContext context, int index) {
-        //       return ListTile(
-        //           leading: const Icon(Icons.list),
-        //           trailing: const Text(
-        //             "GFG",
-        //             style: TextStyle(color: Colors.green, fontSize: 15),
-        //           ),
-        //           title: Text("List item $index"));
-        //     }),
       ],
     );
   }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return ListView.builder(
-  //       itemCount: 5,
-  //       itemBuilder: (BuildContext context, int index) {
-  //         return ListTile(
-  //             leading: const Icon(Icons.list),
-  //             trailing: const Text(
-  //               "GFG",
-  //               style: TextStyle(color: Colors.green, fontSize: 15),
-  //             ),
-  //             title: Text("List item $index"));
-  //       });
-  // }
 }

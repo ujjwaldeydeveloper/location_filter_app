@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'custom_app_bar.dart';
 import 'filter_description.dart';
-import 'home.dart';
+import 'widgets/search_bar_widget.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -35,9 +35,9 @@ class _AppState extends State<App> {
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Home(),
+            SearchBarWidget(),
             Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.only(top: 20.0),
               child: FilterDescription(),
             )
           ],

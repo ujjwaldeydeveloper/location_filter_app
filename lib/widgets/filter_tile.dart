@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:location_filter_app/model/country_model.dart';
 
 class FilterTile extends StatelessWidget {
-  const FilterTile({super.key});
+  final CountryModel mockCountry;
+
+  const FilterTile(this.mockCountry, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +16,9 @@ class FilterTile extends StatelessWidget {
             value: true,
             onChanged: (value) => false,
           ),
-          Image.network('https://dpvr8cthj0mc3.cloudfront.net/hot_emoji.png'),
-          SizedBox(width: 10),
-          Text('data'),
+          Image.network(mockCountry.flagUrl),
+          const SizedBox(width: 10),
+          Text(mockCountry.name),
         ],
       ),
     );

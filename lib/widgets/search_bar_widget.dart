@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class SearchBarWidget extends StatelessWidget {
   const SearchBarWidget({super.key});
 
+  // const SearchBarWidget({required super.onPressed, required super.child});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +21,7 @@ class SearchBarWidget extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: Icon(Icons.search_off_rounded),
+            child: Icon(Icons.search),
           ),
           SizedBox(
             width: 16.0,

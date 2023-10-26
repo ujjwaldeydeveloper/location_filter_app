@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:location_filter_app/model/country_model.dart';
 
-class FilterTile extends StatelessWidget {
+class FilterTile extends StatefulWidget {
   final CountryModel mockCountry;
 
   const FilterTile(this.mockCountry, {super.key});
+
+  @override
+  State<FilterTile> createState() => _FilterTileState();
+}
+
+class _FilterTileState extends State<FilterTile> {
+  bool? isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +20,16 @@ class FilterTile extends StatelessWidget {
       child: Row(
         children: [
           Checkbox(
-            value: true,
-            onChanged: (value) => false,
+            value: isChecked,
+            onChanged: (bool? value) {
+              setState(() {
+                isChecked = value!;
+              });
+            },
           ),
-          Image.network(mockCountry.flagUrl),
+          Image.network(widget.mockCountry.flagUrl),
           const SizedBox(width: 10),
-          Text(mockCountry.name),
+          Text(widget.mockCountry.name),
         ],
       ),
     );

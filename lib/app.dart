@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'custom_app_bar.dart';
 import 'filter_description.dart';
 import 'widgets/search_bar_widget.dart';
 
@@ -12,8 +11,11 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  bool isTap = false;
+
   @override
   Widget build(BuildContext context) {
+    print('isTap value: $isTap');
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -31,14 +33,24 @@ class _AppState extends State<App> {
           SizedBox(width: 8),
         ],
       ),
-      body: const Padding(
+      body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: [
-            SearchBarWidget(),
-            Padding(
-              padding: EdgeInsets.only(top: 20.0),
-              child: FilterDescription(),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  isTap = true;
+                });
+              },
+              child: SearchBarWidget(),
+            ),
+            Visibility(
+              visible: isTap,
+              child: Padding(
+                padding: EdgeInsets.only(top: 20.0),
+                child: FilterDescription(),
+              ),
             )
           ],
         ),

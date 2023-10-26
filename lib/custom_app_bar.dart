@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends AppBar {
+  CustomAppBar({super.key});
+
   @override
   final Widget title = Text(
     "Tourism & Co.".toUpperCase(),
@@ -11,6 +13,7 @@ class CustomAppBar extends AppBar {
   );
 
   var result = <Widget>[];
+
   List<Widget> _renderFacts() {
     for (int i = 0; i < 2; i++) {
       result.add(Text('data1'));

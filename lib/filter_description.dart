@@ -3,6 +3,7 @@ import 'package:location_filter_app/data_model/country_model.dart';
 import 'package:location_filter_app/network_services/api_service.dart';
 import 'package:location_filter_app/widgets/filter_tile.dart';
 
+import 'custom_app_bar.dart';
 import 'mocks/mocks_country.dart';
 
 class FilterDescription extends StatefulWidget {
@@ -17,6 +18,7 @@ class _FilterDescriptionState extends State<FilterDescription> {
   List<CountryModel> _searchedCountry = [];
   List<CountryModel> checkedCountry = [];
   bool isChecked = false;
+  bool orientationHorizontal = true;
   @override
   void initState() {
     super.initState();
@@ -73,6 +75,7 @@ class _FilterDescriptionState extends State<FilterDescription> {
           ),
         ),
         const SizedBox(height: 10),
+        // sideBar(),
         const Row(
           children: [
             Icon(Icons.close),
@@ -105,5 +108,40 @@ class _FilterDescriptionState extends State<FilterDescription> {
                 child: Text(checkedCountry[index].name),
               ));
         }));
+  }
+
+  int _selectedIndex = 0;
+  Widget sideBar() {
+    final List<String> items = ['Snacks', 'Drinks', 'Food'];
+    return Container(
+      color: Colors.white,
+      child: Column(
+        children: items
+            .map((e) => Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _selectedIndex = items.indexOf(e);
+                      });
+                    },
+                    child: Row(
+                      children: [
+                        RotatedBox(quarterTurns: 3, child: Text(e)),
+                        if (items.indexOf(e) == _selectedIndex)
+                          const Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: CircleAvatar(
+                              backgroundColor: Colors.deepOrange,
+                              radius: 5.0,
+                            ),
+                          )
+                      ],
+                    ),
+                  ),
+                ))
+            .toList(),
+      ),
+    );
   }
 }
